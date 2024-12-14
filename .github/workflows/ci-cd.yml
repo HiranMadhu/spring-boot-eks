@@ -1,7 +1,7 @@
 name: Deploy to AWS ECS
 on:
   push:
-    branches: [ deploy-to-ecs ]
+    branches: [ main ]
 jobs:
   build-and-deploy:
     runs-on: [ ubuntu-latest ]
@@ -52,7 +52,7 @@ jobs:
           task-definition: springboot-app-task-definition.json
           container-name: springboot-example
           image: ${{ steps.build-image.outputs.image }}
-          
+
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
