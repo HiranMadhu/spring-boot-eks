@@ -20,6 +20,15 @@ public class UserController {
 	@GetMapping("/users")
 	public ResponseEntity<List<UserDto>> getUsers() {
 		List<UserDto> usersList = userService.getUsers();
+
+		// Iterate through each user and modify the name
+		for (UserDto user : usersList) {
+			String modifiedFirstName = user.getFirstName() + " - modified";  // Append to first name
+			String modifiedLastName = user.getLastName() + " - modified";   // Append to last name
+			user.setFirstName(modifiedFirstName);
+			user.setLastName(modifiedLastName);
+		}
+
 		return new ResponseEntity<>(usersList, HttpStatus.OK);
 	}
 
